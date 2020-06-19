@@ -30160,7 +30160,7 @@ function SpaceGallery() {
   var fetchData = function fetchData(e) {
     e.preventDefault();
 
-    _axios.default.get("https://images-api.nasa.gov/search?q=".concat(state.search, "&media_type=image")).then(function (_ref3) {
+    _axios.default.get("https://cors-anywhere.herokuapp.com/https://images-api.nasa.gov/search?q=".concat(state.search, "&media_type=image")).then(function (_ref3) {
       var data = _ref3.data;
       var results = data.collection.items;
       setState(function (prevState) {
@@ -30245,7 +30245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61063" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57140" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -74,7 +74,7 @@ function SpaceGallery() {
     const fetchData = e => {
         e.preventDefault();
 
-      axios.get(`https://images-api.nasa.gov/search?q=${state.search}&media_type=image`)
+      axios.get(`https://cors-anywhere.herokuapp.com/https://images-api.nasa.gov/search?q=${state.search}&media_type=image`)
         .then(({data}) => {
 
             let results = data.collection.items;

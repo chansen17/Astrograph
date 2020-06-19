@@ -7,7 +7,7 @@ function SpaceImageOfTheDay() {
     const [photo, setPhoto] = useState('');
 
     const fetchImage = () => {
-        axios.get(`https://api.nasa.gov/planetary/apod?api_key=P130VmCns7WhlpyYMldkBQw4AjBJFkMdfNrFR4ss`)
+        axios.get(`https://cors-anywhere.herokuapp.com/https://api.nasa.gov/planetary/apod?api_key=P130VmCns7WhlpyYMldkBQw4AjBJFkMdfNrFR4ss`)
 
             .then(({data}) => {
                 

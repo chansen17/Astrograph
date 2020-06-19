@@ -30078,7 +30078,7 @@ function SpaceImageOfTheDay() {
       setPhoto = _useState2[1];
 
   var fetchImage = function fetchImage() {
-    _axios.default.get("https://api.nasa.gov/planetary/apod?api_key=P130VmCns7WhlpyYMldkBQw4AjBJFkMdfNrFR4ss").then(function (_ref) {
+    _axios.default.get("https://cors-anywhere.herokuapp.com/https://api.nasa.gov/planetary/apod?api_key=P130VmCns7WhlpyYMldkBQw4AjBJFkMdfNrFR4ss").then(function (_ref) {
       var data = _ref.data;
       setPhoto(data);
     }).catch(function (error) {
@@ -30130,7 +30130,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61063" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57140" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('45425cf9861d403c8fbbba209e262e69');
 
 function SpaceNews() {
     const [state, setState] = useState({
@@ -8,32 +10,38 @@ function SpaceNews() {
     });
 
     const fetchNews = () => {
-        axios.get(`https://newsapi.org/v2/everything?q=nasa&apiKey=45425cf9861d403c8fbbba209e262e69`)
 
-        .then(({data}) => {
+        newsapi.v2.everything({
+            q: 'nasa',
+            sources: 'cnn, usa-today, msnbc, bbc',
+            language: 'en',
+          }).then((response) => {
 
-            let articlesArray = data.articles;
-            console.log(data);
+            console.log(response)
 
+            let articlesArray = response.articles;
             setState(prevState => {
                 return {...prevState, articles: articlesArray}
             })
-
-        });
+          });
     }
+    
 
     const handleTopicChange = (topic) => {
-        axios.get(`https://newsapi.org/v2/everything?q=${topic}&apiKey=45425cf9861d403c8fbbba209e262e69`)
 
-        .then(({data}) => {
+        newsapi.v2.everything({
+            q: {topic},
+            sources: 'cnn, usa-today, msnbc, bbc',
+            language: 'en',
+          }).then((response) => {
 
-            let updatedData = data.articles;
+            console.log(response)
 
+            let updatedData = response.articles;
             setState(prevState => {
                 return {...prevState, articles: updatedData}
             })
-
-        });
+          });
     }
 
     useEffect(() => {
