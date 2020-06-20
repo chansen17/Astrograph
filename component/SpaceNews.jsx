@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
-const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI('45425cf9861d403c8fbbba209e262e69');
 
 function SpaceNews() {
     const [state, setState] = useState({
@@ -11,37 +10,32 @@ function SpaceNews() {
 
     const fetchNews = () => {
 
-        newsapi.v2.everything({
-            q: 'nasa',
-            sources: 'cnn, usa-today, msnbc, bbc',
-            language: 'en',
-          }).then((response) => {
+        axios.get(`https://gnews.io/api/v3/search?q=nasa&token=1965549aba8c046141a9b13cb755039f`)
+            .then(({data}) => {
 
-            console.log(response)
+                let articlesArray = data.articles;
 
-            let articlesArray = response.articles;
-            setState(prevState => {
-                return {...prevState, articles: articlesArray}
+                setState(prevState => {
+                    return {...prevState, articles: articlesArray}
+                })
+                console.log(data)
             })
-          });
+
     }
     
 
     const handleTopicChange = (topic) => {
 
-        newsapi.v2.everything({
-            q: {topic},
-            sources: 'cnn, usa-today, msnbc, bbc',
-            language: 'en',
-          }).then((response) => {
+          axios.get(`https://gnews.io/api/v3/search?q=${topic}&token=1965549aba8c046141a9b13cb755039f`)
+            .then(({data}) => {
 
-            console.log(response)
-
-            let updatedData = response.articles;
-            setState(prevState => {
-                return {...prevState, articles: updatedData}
+                let updatedArticles = data.articles;
+                setState(prevState => {
+                    return {...prevState, articles: updatedArticles}
+                })
+                
+                console.log(data)
             })
-          });
     }
 
     useEffect(() => {
@@ -69,7 +63,7 @@ function SpaceNews() {
                                 <div className="col-md-6" key={article.title}>
                                     <ul className="articles-list">
                                         <li>
-                                            <img src={article.urlToImage} alt=""/>
+                                            <img src={article.image} alt=""/>
                                             <h5>{article.title}</h5>
                                             <p>{article.description}</p>
                                             <a className="btn-sm btn-link" href={article.url}>Go to article</a>
